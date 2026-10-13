@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>보험 유형 3가지 비교</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      padding: 20px 12px;
+    }
+    .container { max-width: 600px; margin: 0 auto; }
+
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #2a78d6 0%, #1d5ca8 100%);
+      padding: 32px 20px;
+      border-radius: 12px;
+      color: white;
+    }
+    .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+    .header p { font-size: 17px; opacity: 0.9; }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-left: 5px solid;
+    }
+    .card.renewal { border-left-color: #2a78d6; }
+    .card.non-renewal { border-left-color: #0ca30c; }
+    .card.whole { border-left-color: #eb6834; }
+
+    .card-title {
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: #0b0b0b;
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .tag-renewal { background: #e6f1fb; color: #185fa5; }
+    .tag-non-renewal { background: #eaf3de; color: #3b6d11; }
+    .tag-whole { background: #faeeda; color: #854f0b; }
+
+    .section {
+      margin-bottom: 20px;
+      padding: 16px;
+      border-radius: 8px;
+    }
+    .card.renewal .section { background: #f0f7ff; }
+    .card.non-renewal .section { background: #f5faf0; }
+    .card.whole .section { background: #fff9f0; }
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0b0b0b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid;
+      border-image: linear-gradient(to right, #d9d7cd, transparent) 1;
+    }
+
+    .features { list-style: none; padding: 0; }
+    .features li {
+      padding: 10px 0;
+      font-size: 18px;
+      line-height: 1.4;
+      color: #0b0b0b;
+      display: flex;
+    }
+    .features li:before {
+      content: "•";
+      color: #0b0b0b;
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 19px;
+    }
+
+    .pros li:before { content: "✓"; color: #0ca30c; font-weight: bold; }
+    .cons li:before { content: "✕"; color: #d03b3b; font-weight: bold; }
+
+    .comparison-section {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .comparison-title {
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #0b0b0b;
+      text-align: center;
+    }
+
+    .comparison-item {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #e1e0d9;
+    }
+    .comparison-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .comparison-label {
+      font-size: 21px;
+      font-weight: 700;
+      color: #0b0b0b; /* 검은색으로 변경 */
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .comparison-row {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .comparison-box {
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .box-renewal { background: #f0f7ff; color: #0b0b0b; }
+    .box-non-renewal { background: #f5faf0; color: #0b0b0b; }
+    .box-whole { background: #fff9f0; color: #0b0b0b; }
+
+    .box-label {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 19px;
+    }
+
+    .comparison-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .comparison-features li {
+      padding: 4px 0;
+      font-size: 18px;
+      color: #0b0b0b;
+      display: flex;
+    }
+    .comparison-features li:before {
+      content: "•";
+      color: #0b0b0b;
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 19px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 18px;
+      line-height: 1.4;
+      color: #333333;
+      margin-top: 20px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid #e1e0d9;
+    }
+    .footer strong {
+      font-size: 22px;
+      color: #1d5ca8;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 헤더 -->
+    <div class="header">
+      <h1>보험 유형 3가지 비교</h1>
+      <p>당신에게 맞는 보험을 찾아보세요</p>
+    </div>
+
+    <!-- 갱신형 보험 -->
+    <div class="card renewal">
+      <div class="card-title">갱신형 보험</div>
+      <span class="card-tag tag-renewal">일정 기간 갱신</span>
+
+      <div class="section">
+        <div class="section-title">주요 특징</div>
+        <ul class="features">
+          <li>일정 기간마다 갱신(15년, 20년, 30년)</li>
+          <li><div><strong>갱신 시 인상된 보험료 적용</strong><br><strong>(여성: 1.8~2.5배, 남성: 2~3배)</strong></div></li>
+          <li><strong>갱신 전에 해약 시 일부 환급금 수령</strong></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">장점</div>
+        <ul class="features pros">
+          <li>초기 보험료 저렴</li>
+          <li>보험료 대비 가장 큰 보장금액</li>
+          <li><strong>일정 기간만 보장 받는 경우에 유리</strong></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">단점</div>
+        <ul class="features cons">
+          <li><strong>갱신 시 누적된 보험료 전부 소멸</strong></li>
+          <li><strong>시기 놓칠 시 다른 보험으로 갈아타기 제한(건강심사 탈락)</strong></li>
+          <li>은퇴 후 갱신 시 보험료 부담</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 비갱신형 보험 -->
+    <div class="card non-renewal">
+      <div class="card-title">비갱신형 보험</div>
+      <span class="card-tag tag-non-renewal">보험료 고정</span>
+
+      <div class="section">
+        <div class="section-title">주요 특징</div>
+        <ul class="features">
+          <li><strong>일정 기간만 납부(10년, 20년, 30년)</strong></li>
+          <li>확정된 만기 설정(90세, 종신)</li>
+          <li>납부 기간 동안 보험료 불변</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">장점</div>
+        <ul class="features pros">
+          <li><strong>노후에 보험료 부담 없음</strong></li>
+          <li>장기 재정 계획 용이</li>
+          <li>보험료 인상 걱정 없음</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">단점</div>
+        <ul class="features cons">
+          <li><strong>갱신형 대비 높은 보험료</strong></li>
+          <li><strong>중도 해약 시 환급금이 적거나 없음</strong></li>
+          <li>인플레이션 영향</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 종신보험 -->
+    <div class="card whole">
+      <div class="card-title">종신보험(환급형)</div>
+      <span class="card-tag tag-whole">평생 보장</span>
+
+      <div class="section">
+        <div class="section-title">주요 특징</div>
+        <ul class="features">
+          <li><strong>사망 담보(기본)에 암·뇌·심장 보장 결합</strong></li>
+          <li><strong>납입 완료 후에도 계속 환급금 증가(복리 효과)</strong></li>
+          <li>평생 동안 보장</li>
+       </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">장점</div>
+        <ul class="features pros">
+          <li><strong>납입 완료 후 높은 환급금(원금 이상)</strong></li>
+          <li><strong>보장받으며 환급금 축적</strong></li>
+          <li>상속 자산으로 활용(비과세)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">단점</div>
+        <ul class="features cons">
+          <li>높은 보험료</li>
+          <li>초기 납입액 대비 환급금 증가에 시간 필요</li>
+          <li>자산 유동성 제한</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 빠른 비교표 -->
+    <div class="comparison-section">
+      <div class="comparison-title">한눈에 보는 비교</div>
+
+      <div class="comparison-item">
+        <div class="comparison-label">보험료</div>
+        <div class="comparison-row">
+          <div class="comparison-box box-renewal">
+            <div class="box-label">갱신형</div>
+            <ul class="comparison-features">
+              <li>낮음 → 상승</li>
+              <li>초기 저렴, 갱신 때마다 상승</li>
+            </ul>
+          </div>
+          <div class="comparison-box box-non-renewal">
+            <div class="box-label">비갱신형</div>
+            <ul class="comparison-features">
+              <li>고정</li>
+              <li>일정 기간만 납부 후 보장 지속</li>
+            </ul>
+          </div>
+          <div class="comparison-box box-whole">
+            <div class="box-label">종신형(환급형)</div>
+            <ul class="comparison-features">
+              <li>높음 · 고정</li>
+              <li>보장받으며 환급금 축적</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-item">
+        <div class="comparison-label">보장 기간</div>
+        <div class="comparison-row">
+          <div class="comparison-box box-renewal">
+            <div class="box-label">갱신형</div>
+            원하는 시점까지<br/>(보통 100세까지 가능)
+          </div>
+          <div class="comparison-box box-non-renewal">
+            <div class="box-label">비갱신형</div>
+            설정된 만기<br/>(90세, 종신)
+          </div>
+          <div class="comparison-box box-whole">
+            <div class="box-label">종신형(환급형)</div>
+            평생
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-item">
+        <div class="comparison-label">추천 대상</div>
+        <div class="comparison-row">
+          <div class="comparison-box box-renewal">
+            <div class="box-label">갱신형</div>
+            초기 비용 절감 및<br/>일정기간만 보장 필요자
+          </div>
+          <div class="comparison-box box-non-renewal">
+            <div class="box-label">비갱신형</div>
+            장기 안정성과<br/>확정된 만기 필요자
+          </div>
+          <div class="comparison-box box-whole">
+            <div class="box-label">종신형(환급형)</div>
+            원금 이상의 환급금 또는<br/>상속 재산 형성 필요자
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 하단 연락처 -->
+    <div class="footer">
+      📞 <strong>신한라이프 윤영호<br/>010-5719-1141</strong><br/>궁금하신 점은 언제든 연락주세요
+    </div>
+  </div>
+</body>
+</html>
