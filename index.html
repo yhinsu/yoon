@@ -4,86 +4,98 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>보험 유형 3가지 비교</title>
-  <script>document.documentElement.classList.add('js');</script>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try { var s = localStorage.getItem('yoon-font'); var i = [100, 112.5, 125, 137.5].indexOf(parseFloat(s)); if (i > 0) { d.style.fontSize = s + '%'; d.setAttribute('data-fs', i); } } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
+    /* 단정하고 신뢰감: 남색 기반, 플랫, 선과 여백으로 구조를 보여준다 */
     :root {
-      --blue: #2a78d6;
-      --blue-d: #1d5ca8;
-      --green: #1a8f1a;
-      --green-d: #0f6e0f;
-      --orange: #d9541f;
-      --orange-d: #b8400f;
-      --red: #d63a2f;
+      --navy: #0c2f5a;
+      --navy-2: #123d72;
+      --blue: #1d5ca8;
+      --blue-soft: #edf3fa;
+      --green: #1f6f3a;
+      --green-soft: #edf6f0;
+      --orange: #a4460f;
+      --orange-soft: #fbf1ea;
+      --red: #b42318;
+      --red-soft: #fdf1f0;
       --ink: #0f172a;
-      --radius: 22px;
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.05);
+      --muted: #334155;
+      --line: #d5deea;
+      --bg: #f3f6fa;
+      --mark: #ffe48a;
+      --radius: 14px;
       --bar-h: 5rem;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-      background: linear-gradient(180deg, #e3edfa 0%, #f4f7fb 38rem) no-repeat, #f4f7fb;
+      font-family: 'IBM Plex Sans KR', 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      background: var(--bg);
       color: var(--ink);
-      padding: 1rem 0.75rem 2rem;
+      padding: 0.75rem 0.75rem 2rem;
       font-size: 1.125rem;
-      line-height: 1.55;
+      line-height: 1.6;
       word-break: keep-all;
       overflow-wrap: break-word;
       -webkit-text-size-adjust: 100%;
     }
     img { max-width: 100%; height: auto; }
-    a { -webkit-tap-highlight-color: transparent; }
     .container { width: 100%; max-width: 47.5rem; margin: 0 auto; }
+    .i { width: 1.25em; height: 1.25em; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #f2b705; outline-offset: 3px; }
 
-    /* ── 히어로 ── */
+    /* 글자 크기 */
+    .fontsize {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .fontsize button {
+      min-width: 3.625rem;
+      min-height: 3.625rem;
+      padding: 0 0.75rem;
+      border: 2px solid var(--navy);
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--navy);
+      font: inherit;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .fontsize button:disabled { border-color: var(--line); color: #64748b; cursor: default; }
+
+    /* 히어로 */
     .hero {
-      position: relative;
-      overflow: hidden;
-      text-align: center;
+      background: var(--navy);
       color: #ffffff;
-      background: linear-gradient(135deg, #2a78d6 0%, #16488a 100%);
-      border-radius: 28px;
-      padding: 1.5rem clamp(1rem, 5vw, 2.5rem) 1.75rem;
-      margin-bottom: 1.25rem;
-      box-shadow: 0 16px 40px rgba(22, 72, 138, 0.28);
+      border-radius: var(--radius);
+      padding: 1.5rem clamp(1rem, 5vw, 2.25rem) 1.75rem;
+      margin-bottom: 1rem;
     }
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .hero::before {
-      width: 16rem; height: 16rem;
-      top: -6rem; right: -5rem;
-      background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%);
-    }
-    .hero::after {
-      width: 12rem; height: 12rem;
-      bottom: -5rem; left: -4rem;
-      background: radial-gradient(circle, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 70%);
-    }
-    .hero > * { position: relative; z-index: 1; }
-
     .hero-profile {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 0.875rem;
-      max-width: 100%;
-      padding: 0.375rem 1.5rem 0.375rem 0.375rem;
+      gap: 1rem;
+      padding-bottom: 1.125rem;
       margin-bottom: 1.25rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
     }
     .hero-photo {
-      width: 76px;
-      height: 76px;
+      width: 84px;
+      height: 84px;
       flex-shrink: 0;
       border-radius: 50%;
       border: 3px solid #ffffff;
@@ -91,308 +103,288 @@
       object-position: 50% 6%;
       background: #ffffff;
     }
-    .hero-name { display: flex; flex-direction: column; text-align: left; line-height: 1.25; min-width: 0; }
-    .hero-company { font-size: 1.125rem; opacity: 0.92; }
-    .hero-person { font-size: clamp(1.6rem, 1.4rem + 1vw, 2rem); font-weight: 800; letter-spacing: -0.01em; }
-
+    .hero-name { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; }
+    .hero-company { font-size: 1.125rem; color: #d6e2f2; }
+    .hero-person { font-size: clamp(1.75rem, 1.5rem + 1vw, 2.125rem); font-weight: 700; }
     .hero h1 {
-      font-size: clamp(1.9rem, 7.6vw, 3rem);
-      font-weight: 800;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+      font-size: clamp(1.9rem, 7.2vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.375rem;
     }
-    .hero p { font-size: clamp(1.15rem, 1.05rem + 0.6vw, 1.375rem); opacity: 0.95; }
-
+    .hero p { font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.3rem); color: #e3ebf6; }
     .hero-cta {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
       width: 100%;
-      max-width: 24rem;
-      min-height: 62px;
-      margin: 1.5rem auto 0;
+      min-height: 3.875rem;
+      margin-top: 1.5rem;
       padding: 0.5rem 1rem;
-      border-radius: 999px;
-      background: #ffd84d;
-      color: #1a1a1a;
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--navy);
       font-size: 1.25rem;
-      font-weight: 800;
+      font-weight: 700;
+      text-align: center;
       text-decoration: none;
-      animation: glow-yellow 2.4s ease-in-out infinite;
-      transition: transform 0.15s ease;
     }
-    .hero-cta:active { transform: scale(0.97); }
+    .hero-cta:active, .toc a:active, .btn:active, .fontsize button:active { transform: scale(0.97); }
 
-    @keyframes glow-yellow {
-      0%, 100% { box-shadow: 0 6px 16px rgba(0,0,0,0.18), 0 0 0 0 rgba(255, 216, 77, 0.55); }
-      50% { box-shadow: 0 6px 16px rgba(0,0,0,0.18), 0 0 0 12px rgba(255, 216, 77, 0); }
-    }
-    @keyframes glow-blue {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(42, 120, 214, 0.5); }
-      50% { box-shadow: 0 0 0 10px rgba(42, 120, 214, 0); }
-    }
-
-    /* ── 목차 ── */
+    /* 목차 */
     .toc {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.625rem;
+      gap: 0.5rem;
       margin-bottom: 1.5rem;
     }
     .toc a {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 0.5rem;
       min-width: 0;
-      min-height: 60px;
-      padding: 0.5rem 0.5rem;
-      border-radius: 16px;
-      color: #ffffff;
+      min-height: 3.75rem;
+      padding: 0.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      border-bottom: 4px solid var(--tc);
+      background: #ffffff;
+      color: var(--ink);
       font-size: 1.2rem;
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.3;
       text-align: center;
       text-decoration: none;
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.14);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: transform 0.12s ease;
     }
-    .toc a:active { transform: scale(0.97); box-shadow: 0 2px 6px rgba(15, 23, 42, 0.14); }
+    .toc a .i { color: var(--tc); }
     .toc a:last-child { grid-column: 1 / -1; }
-    .toc a.toc-renewal { background: linear-gradient(135deg, var(--blue), var(--blue-d)); }
-    .toc a.toc-non-renewal { background: linear-gradient(135deg, var(--green), var(--green-d)); }
-    .toc a.toc-whole { background: linear-gradient(135deg, var(--orange), var(--orange-d)); }
-    .toc a.toc-compare { background: linear-gradient(135deg, #3b4a6b, #1e2a47); }
-    .toc a.toc-contact { background: linear-gradient(135deg, var(--blue-d), #16488a); }
+    .toc-renewal { --tc: var(--blue); }
+    .toc-non-renewal { --tc: var(--green); }
+    .toc-whole { --tc: var(--orange); }
+    .toc-compare { --tc: var(--navy); }
+    .toc-contact { --tc: var(--navy); }
 
     #renewal, #non-renewal, #whole, #compare, #contact {
       scroll-margin-top: 1rem;
       scroll-margin-bottom: calc(var(--bar-h) + 1rem + env(safe-area-inset-bottom));
     }
 
-    /* ── 카드 ── */
+    /* 카드 */
     .cards {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.25rem;
-      margin-bottom: 1.25rem;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
     .card {
       --c: var(--blue);
-      --c-d: var(--blue-d);
-      --c-soft: #edf4fd;
+      --c-soft: var(--blue-soft);
       min-width: 0;
-      overflow: hidden;
       background: #ffffff;
+      border: 1px solid var(--line);
+      border-top: 6px solid var(--c);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
     }
-    .card.non-renewal { --c: var(--green); --c-d: var(--green-d); --c-soft: #edf7ed; }
-    .card.whole { --c: var(--orange); --c-d: var(--orange-d); --c-soft: #fdf1eb; }
+    .card.non-renewal { --c: var(--green); --c-soft: var(--green-soft); }
+    .card.whole { --c: var(--orange); --c-soft: var(--orange-soft); }
 
     .card-head {
       display: flex;
       align-items: center;
       gap: 0.875rem;
-      padding: 1.25rem clamp(1rem, 4vw, 1.5rem);
-      background: linear-gradient(135deg, var(--c), var(--c-d));
-      color: #ffffff;
+      padding: 1.25rem clamp(1rem, 4vw, 1.5rem) 1rem;
+      border-bottom: 1px solid var(--line);
     }
     .card-icon {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 3.25rem;
+      height: 3.25rem;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.95);
-      font-size: 1.75rem;
-      line-height: 1;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      background: var(--c-soft);
+      color: var(--c);
     }
+    .card-icon .i { width: 1.6rem; height: 1.6rem; }
     .card-head-text { min-width: 0; }
     .card-title {
       font-size: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.3;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.375rem;
+      margin-bottom: 0.25rem;
     }
     .card-tag {
       display: inline-block;
       font-size: 1.125rem;
-      font-weight: 700;
+      font-weight: 600;
       line-height: 1.4;
-      padding: 0.25rem 0.875rem;
+      padding: 0.125rem 0.75rem;
       border-radius: 999px;
-      background: #ffffff;
+      background: var(--c-soft);
     }
     .tag-renewal { color: #185fa5; }
     .tag-non-renewal { color: #3b6d11; }
     .tag-whole { color: #854f0b; }
 
-    .card-body { padding: 1.25rem clamp(0.875rem, 3.5vw, 1.5rem) 1.5rem; }
-
-    .section {
-      padding: 1rem 1rem 0.5rem;
-      border-radius: 16px;
-      margin-bottom: 1rem;
-    }
-    .section:last-child { margin-bottom: 0; }
-    .section-feature { background: var(--c-soft); }
-    .section-pros { background: #f1faf1; }
-    .section-cons { background: #fff5f4; }
-
+    .card-body { padding: 0.5rem clamp(1rem, 4vw, 1.5rem) 1.25rem; }
+    .section { padding: 1rem 0 0.25rem; }
+    .section + .section { border-top: 1px solid var(--line); }
     .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.375rem);
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.4;
-      color: var(--ink);
-      padding-bottom: 0.5rem;
       margin-bottom: 0.25rem;
-      border-bottom: 2px solid rgba(15, 23, 42, 0.08);
     }
-    .section-feature .section-title::before { content: "📌 "; }
-    .section-pros .section-title::before { content: "👍 "; }
-    .section-cons .section-title::before { content: "⚠️ "; }
+    .section-feature .section-title .i { color: var(--c); }
+    .section-pros .section-title .i { color: var(--green); }
+    .section-cons .section-title .i { color: var(--red); }
 
     .features { list-style: none; }
     .features li {
       position: relative;
-      padding: 0.75rem 0 0.75rem 2.25rem;
+      padding: 0.625rem 0 0.625rem 2.25rem;
       font-size: 1.2rem;
-      line-height: 1.55;
-      color: var(--ink);
+      line-height: 1.6;
     }
-    .features li + li { border-top: 1px dashed rgba(15, 23, 42, 0.18); }
-    .features li::before {
+    .features li::before,
+    .features li::after {
       content: "";
       position: absolute;
+    }
+    .features li::before {
       left: 0.5rem;
-      top: calc(0.75rem + 0.775em - 0.3rem);
+      top: calc(0.625rem + 0.8em - 0.3rem);
       width: 0.6rem;
       height: 0.6rem;
-      border-radius: 50%;
+      border-radius: 2px;
       background: var(--c);
     }
     .pros li::before,
     .cons li::before {
       left: 0;
-      top: calc(0.75rem + 0.775em - 0.75rem);
+      top: calc(0.625rem + 0.8em - 0.75rem);
       width: 1.5rem;
       height: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      font-size: 0.95rem;
-      font-weight: 900;
-      line-height: 1;
+      border-radius: 50%;
     }
-    .pros li::before { content: "✓"; background: var(--green); }
-    .cons li::before { content: "✕"; background: var(--red); }
+    .pros li::before { background: var(--green); }
+    .cons li::before { background: var(--red); }
+    .pros li::after,
+    .cons li::after {
+      left: 0.25rem;
+      top: calc(0.625rem + 0.8em - 0.5rem);
+      width: 1rem;
+      height: 1rem;
+      background: #ffffff;
+      -webkit-mask: var(--mask) center / contain no-repeat;
+      mask: var(--mask) center / contain no-repeat;
+    }
+    .pros li::after { --mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"); }
+    .cons li::after { --mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round'%3E%3Cpath d='M18 6 6 18M6 6l12 12'/%3E%3C/svg%3E"); }
 
-    /* ── 한눈에 보는 비교 ── */
+    /* 핵심 숫자와 경고 강조 */
+    .num {
+      font-weight: 700;
+      background: linear-gradient(transparent 58%, var(--mark) 58%);
+      padding: 0 0.08em;
+    }
+    .warn strong { color: var(--red); }
+    .features li.warn {
+      background: var(--red-soft);
+      border-radius: 10px;
+      margin: 0.25rem 0;
+      padding-right: 0.75rem;
+    }
+
+    /* 한눈에 보는 비교 */
     .comparison-section {
       background: #ffffff;
+      border: 1px solid var(--line);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1.75rem clamp(1rem, 4vw, 1.75rem);
-      margin-bottom: 1.25rem;
+      padding: 1.5rem clamp(1rem, 4vw, 1.75rem);
+      margin-bottom: 1rem;
     }
     .comparison-title {
-      font-size: clamp(1.6rem, 1.35rem + 1.2vw, 2.125rem);
-      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: clamp(1.6rem, 1.35rem + 1.2vw, 2rem);
+      font-weight: 700;
       line-height: 1.3;
-      text-align: center;
-      letter-spacing: -0.01em;
-      margin-bottom: 1.5rem;
+      padding-bottom: 0.875rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid var(--navy);
     }
-    .comparison-title::after {
-      content: "";
-      display: block;
-      width: 4.5rem;
-      height: 5px;
-      margin: 0.625rem auto 0;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--blue), var(--orange));
-    }
-    .comparison-item { margin-bottom: 1.75rem; }
+    .comparison-title .i { color: var(--navy); }
+    .comparison-item { margin-bottom: 1.5rem; }
     .comparison-item:last-child { margin-bottom: 0; }
     .comparison-label {
       font-size: clamp(1.3rem, 1.15rem + 0.7vw, 1.5rem);
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.4;
       padding-left: 0.75rem;
-      border-left: 5px solid var(--blue-d);
-      margin-bottom: 0.875rem;
+      border-left: 5px solid var(--navy);
+      margin-bottom: 0.75rem;
     }
-    .comparison-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-    }
+    .comparison-row { display: grid; grid-template-columns: 1fr; gap: 0.625rem; }
     .comparison-box {
       min-width: 0;
-      padding: 1rem 1.125rem;
-      border-radius: 14px;
-      border-top: 5px solid;
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 5px solid;
+      border-radius: 10px;
       font-size: 1.2rem;
-      line-height: 1.55;
-      color: var(--ink);
+      line-height: 1.6;
     }
-    .box-renewal { background: #f0f6fe; border-top-color: var(--blue); }
-    .box-non-renewal { background: #f1faf1; border-top-color: var(--green); }
-    .box-whole { background: #fff4ee; border-top-color: var(--orange); }
-    .box-label { font-size: 1.25rem; font-weight: 800; margin-bottom: 0.375rem; }
-    .box-renewal .box-label { color: var(--blue-d); }
-    .box-non-renewal .box-label { color: var(--green-d); }
-    .box-whole .box-label { color: var(--orange-d); }
-
+    .box-renewal { border-left-color: var(--blue); }
+    .box-non-renewal { border-left-color: var(--green); }
+    .box-whole { border-left-color: var(--orange); }
+    .box-label { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .box-renewal .box-label { color: var(--blue); }
+    .box-non-renewal .box-label { color: var(--green); }
+    .box-whole .box-label { color: var(--orange); }
     .comparison-features { list-style: none; }
-    .comparison-features li {
-      position: relative;
-      padding: 0.25rem 0 0.25rem 1.375rem;
-      font-size: 1.2rem;
-      line-height: 1.55;
-    }
+    .comparison-features li { position: relative; padding: 0.125rem 0 0.125rem 1.25rem; }
     .comparison-features li::before {
       content: "";
       position: absolute;
       left: 0.25rem;
-      top: calc(0.25rem + 0.775em - 0.25rem);
-      width: 0.5rem;
-      height: 0.5rem;
-      border-radius: 50%;
-      background: currentColor;
-      opacity: 0.6;
+      top: calc(0.125rem + 0.8em - 0.2rem);
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 1px;
+      background: var(--muted);
     }
 
-    /* ── 명함 ── */
+    /* 명함 */
     .footer {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1rem;
       text-align: center;
       background: #ffffff;
+      border: 1px solid var(--line);
+      border-top: 6px solid var(--navy);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border-top: 6px solid var(--blue-d);
-      padding: 1.75rem clamp(1rem, 4vw, 2rem);
+      padding: 1.5rem clamp(1rem, 4vw, 2rem);
       font-size: 1.15rem;
-      line-height: 1.55;
-      color: #334155;
+      line-height: 1.6;
+      color: var(--muted);
     }
     .footer-photo {
-      width: 120px;
-      height: 120px;
+      width: 112px;
+      height: 112px;
       flex-shrink: 0;
       border-radius: 50%;
-      border: 4px solid #ffffff;
-      box-shadow: 0 0 0 3px var(--blue), 0 8px 20px rgba(15, 23, 42, 0.15);
+      border: 3px solid var(--line);
       object-fit: cover;
       object-position: 50% 6%;
     }
@@ -400,10 +392,9 @@
     .footer-info strong {
       display: inline-block;
       font-size: clamp(1.4rem, 1.25rem + 0.8vw, 1.75rem);
-      font-weight: 800;
-      color: var(--blue-d);
+      font-weight: 700;
+      color: var(--navy);
       line-height: 1.35;
-      margin-bottom: 0.25rem;
     }
     .tel {
       display: inline-flex;
@@ -411,15 +402,14 @@
       min-height: 3.5rem;
       color: var(--ink);
       font-size: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
-      font-weight: 800;
-      letter-spacing: 0.01em;
+      font-weight: 700;
       text-decoration: none;
       white-space: nowrap;
     }
     .footer-actions {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.625rem;
+      gap: 0.5rem;
       margin-top: 1rem;
     }
 
@@ -429,25 +419,20 @@
       justify-content: center;
       gap: 0.375rem;
       min-width: 0;
-      min-height: 58px;
+      min-height: 3.625rem;
       padding: 0.375rem 0.5rem;
-      border-radius: 14px;
-      border: 2px solid var(--blue-d);
+      border-radius: 12px;
+      border: 2px solid var(--navy);
       font-size: 1.2rem;
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.3;
       text-align: center;
       text-decoration: none;
-      transition: transform 0.15s ease;
     }
-    .btn:active { transform: scale(0.97); }
-    @media (max-width: 359px) {
-      .btn .ico { display: none; }
-    }
-    .btn-call { background: var(--blue-d); color: #ffffff; }
-    .btn-sms { background: #ffffff; color: var(--blue-d); }
+    .btn-call { background: var(--navy); color: #ffffff; }
+    .btn-sms { background: #ffffff; color: var(--navy); }
 
-    /* ── 화면 아래 고정 연락 바 ── */
+    /* 화면 아래 고정 연락 바 */
     .contact-bar {
       position: fixed;
       left: 0;
@@ -456,33 +441,34 @@
       z-index: 100;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.625rem;
+      gap: 0.5rem;
       padding: 0.625rem 0.75rem calc(0.625rem + env(safe-area-inset-bottom));
-      background: rgba(255, 255, 255, 0.97);
-      box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.14);
-      transition: transform 0.35s ease;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      box-shadow: 0 -4px 14px rgba(15, 23, 42, 0.10);
+      transition: transform 0.3s ease;
     }
     .contact-bar.is-hidden { transform: translateY(110%); }
-    .contact-bar .btn-call { animation: glow-blue 2.4s ease-in-out infinite; }
 
-    /* ── 떠오르는 효과 (JS가 켜져 있을 때만 숨김) ── */
-    .js .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    @media (max-width: 359px) {
+      .btn .i { display: none; }
     }
-    .js .reveal.is-visible { opacity: 1; transform: none; }
-
+    @media (max-width: 479px) {
+      html[data-fs="2"] .toc, html[data-fs="3"] .toc { grid-template-columns: 1fr; }
+      html[data-fs="2"] .btn .i, html[data-fs="3"] .btn .i { display: none; }
+      html[data-fs="3"] body { padding-left: 0.5rem; padding-right: 0.5rem; }
+      html[data-fs="3"] .footer { padding-left: 0.75rem; padding-right: 0.75rem; }
+    }
     @media (max-width: 899px) {
       body { padding-bottom: calc(var(--bar-h) + 1.5rem + env(safe-area-inset-bottom)); }
     }
     @media (min-width: 640px) {
-      .footer { flex-direction: row; text-align: left; align-items: center; gap: 1.75rem; }
+      .footer { flex-direction: row; text-align: left; gap: 1.75rem; }
       .footer-actions { max-width: 26rem; }
     }
     @media (min-width: 768px) {
-      .hero-photo { width: 92px; height: 92px; }
-      .hero { padding-top: 2rem; padding-bottom: 2.25rem; }
+      .hero-photo { width: 96px; height: 96px; }
+      .hero-cta { width: fit-content; min-width: 20rem; padding: 0.5rem 2rem; }
     }
     @media (min-width: 900px) {
       .contact-bar { display: none; }
@@ -494,23 +480,36 @@
       .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .comparison-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-      .js .reveal { opacity: 1; transform: none; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-renew" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.36 6.36L3 16"/><path d="M3 21v-5h5"/><path d="M3 12a9 9 0 0 1 15.36-6.36L21 8"/><path d="M21 3v5h-5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17v-5"/><path d="M13 17V8"/><path d="M18 17v-8"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h12"/><path d="M9 12h12"/><path d="M9 18h12"/><path d="M4 6h.01"/><path d="M4 12h.01"/><path d="M4 18h.01"/></symbol>
+    <symbol id="i-thumb" viewBox="0 0 24 24"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  </svg>
+
   <div class="container">
+    <!-- 글자 크기 -->
+    <div class="fontsize" role="group" aria-label="글자 크기" data-ui>
+      <button type="button" data-step="-1" aria-label="글자 작게">A−</button>
+      <button type="button" data-step="1" aria-label="글자 크게">A+</button>
+    </div>
+
     <!-- 히어로 -->
     <header class="hero">
-      <div class="hero-profile">
-        <img class="hero-photo" src="profile.jpg" alt="신한라이프 윤영호" width="92" height="92">
+      <div class="hero-profile" data-ui>
+        <img class="hero-photo" src="profile.jpg" alt="신한라이프 윤영호" width="96" height="96">
         <div class="hero-name">
           <span class="hero-company">신한라이프</span>
           <span class="hero-person">윤영호</span>
@@ -518,23 +517,23 @@
       </div>
       <h1>보험 유형 3가지 비교</h1>
       <p>당신에게 맞는 보험을 찾아보세요</p>
-      <a class="hero-cta" href="tel:01057191141">📞 전화로 바로 상담</a>
+      <a class="hero-cta" href="tel:01057191141" data-ui><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>전화로 바로 상담</a>
     </header>
 
     <!-- 목차 -->
-    <nav class="toc" aria-label="목차">
-      <a class="toc-renewal" href="#renewal">🔄 갱신형</a>
-      <a class="toc-non-renewal" href="#non-renewal">🔒 비갱신형</a>
-      <a class="toc-whole" href="#whole">🛡️ 종신보험</a>
-      <a class="toc-compare" href="#compare">📊 한눈에 비교</a>
-      <a class="toc-contact" href="#contact">📞 연락처</a>
+    <nav class="toc" aria-label="목차" data-ui>
+      <a class="toc-renewal" href="#renewal"><svg class="i" aria-hidden="true"><use href="#i-renew"/></svg>갱신형</a>
+      <a class="toc-non-renewal" href="#non-renewal"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg>비갱신형</a>
+      <a class="toc-whole" href="#whole"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg>종신보험</a>
+      <a class="toc-compare" href="#compare"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg>한눈에 비교</a>
+      <a class="toc-contact" href="#contact"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>연락처</a>
     </nav>
 
     <div class="cards">
     <!-- 갱신형 보험 -->
-    <div class="card renewal reveal" id="renewal">
+    <div class="card renewal" id="renewal">
       <div class="card-head">
-        <span class="card-icon" aria-hidden="true">🔄</span>
+        <span class="card-icon" aria-hidden="true"><svg class="i"><use href="#i-renew"/></svg></span>
         <div class="card-head-text">
           <div class="card-title">갱신형 보험</div>
           <span class="card-tag tag-renewal">일정 기간 갱신</span>
@@ -543,16 +542,16 @@
 
       <div class="card-body">
       <div class="section section-feature">
-        <div class="section-title">주요 특징</div>
+        <div class="section-title"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg>주요 특징</div>
         <ul class="features">
-          <li>일정 기간마다 갱신(15년, 20년, 30년)</li>
-          <li><div><strong>갱신 시 인상된 보험료 적용</strong><br><strong>(여성: 1.8~2.5배, 남성: 2~3배)</strong></div></li>
+          <li>일정 기간마다 갱신(<span class="num">15년</span>, <span class="num">20년</span>, <span class="num">30년</span>)</li>
+          <li class="warn"><div><strong>갱신 시 인상된 보험료 적용</strong><br><strong>(여성: <span class="num">1.8~2.5배</span>, 남성: <span class="num">2~3배</span>)</strong></div></li>
           <li><strong>갱신 전에 해약 시 일부 환급금 수령</strong></li>
         </ul>
       </div>
 
       <div class="section section-pros">
-        <div class="section-title">장점</div>
+        <div class="section-title"><svg class="i" aria-hidden="true"><use href="#i-thumb"/></svg>장점</div>
         <ul class="features pros">
           <li>초기 보험료 저렴</li>
           <li>보험료 대비 가장 큰 보장금액</li>
@@ -561,10 +560,10 @@
       </div>
 
       <div class="section section-cons">
-        <div class="section-title">단점</div>
+        <div class="section-title"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg>단점</div>
         <ul class="features cons">
-          <li><strong>갱신 시 누적된 보험료 전부 소멸</strong></li>
-          <li><strong>시기 놓칠 시 다른 보험으로 갈아타기 제한(건강심사 탈락)</strong></li>
+          <li class="warn"><strong>갱신 시 누적된 보험료 전부 소멸</strong></li>
+          <li class="warn"><strong>시기 놓칠 시 다른 보험으로 갈아타기 제한(건강심사 탈락)</strong></li>
           <li>은퇴 후 갱신 시 보험료 부담</li>
         </ul>
       </div>
@@ -572,9 +571,9 @@
     </div>
 
     <!-- 비갱신형 보험 -->
-    <div class="card non-renewal reveal" id="non-renewal">
+    <div class="card non-renewal" id="non-renewal">
       <div class="card-head">
-        <span class="card-icon" aria-hidden="true">🔒</span>
+        <span class="card-icon" aria-hidden="true"><svg class="i"><use href="#i-lock"/></svg></span>
         <div class="card-head-text">
           <div class="card-title">비갱신형 보험</div>
           <span class="card-tag tag-non-renewal">보험료 고정</span>
@@ -583,16 +582,16 @@
 
       <div class="card-body">
       <div class="section section-feature">
-        <div class="section-title">주요 특징</div>
+        <div class="section-title"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg>주요 특징</div>
         <ul class="features">
-          <li><strong>일정 기간만 납부(10년, 20년, 30년)</strong></li>
-          <li>확정된 만기 설정(90세, 종신)</li>
+          <li><strong>일정 기간만 납부(<span class="num">10년</span>, <span class="num">20년</span>, <span class="num">30년</span>)</strong></li>
+          <li>확정된 만기 설정(<span class="num">90세</span>, 종신)</li>
           <li>납부 기간 동안 보험료 불변</li>
         </ul>
       </div>
 
       <div class="section section-pros">
-        <div class="section-title">장점</div>
+        <div class="section-title"><svg class="i" aria-hidden="true"><use href="#i-thumb"/></svg>장점</div>
         <ul class="features pros">
           <li><strong>노후에 보험료 부담 없음</strong></li>
           <li>장기 재정 계획 용이</li>
@@ -601,10 +600,10 @@
       </div>
 
       <div class="section section-cons">
-        <div class="section-title">단점</div>
+        <div class="section-title"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg>단점</div>
         <ul class="features cons">
-          <li><strong>갱신형 대비 높은 보험료</strong></li>
-          <li><strong>중도 해약 시 환급금이 적거나 없음</strong></li>
+          <li class="warn"><strong>갱신형 대비 높은 보험료</strong></li>
+          <li class="warn"><strong>중도 해약 시 환급금이 적거나 없음</strong></li>
           <li>인플레이션 영향</li>
         </ul>
       </div>
@@ -612,9 +611,9 @@
     </div>
 
     <!-- 종신보험 -->
-    <div class="card whole reveal" id="whole">
+    <div class="card whole" id="whole">
       <div class="card-head">
-        <span class="card-icon" aria-hidden="true">🛡️</span>
+        <span class="card-icon" aria-hidden="true"><svg class="i"><use href="#i-shield"/></svg></span>
         <div class="card-head-text">
           <div class="card-title">종신보험(환급형)</div>
           <span class="card-tag tag-whole">평생 보장</span>
@@ -623,7 +622,7 @@
 
       <div class="card-body">
       <div class="section section-feature">
-        <div class="section-title">주요 특징</div>
+        <div class="section-title"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg>주요 특징</div>
         <ul class="features">
           <li><strong>사망 담보(기본)에 암·뇌·심장 보장 결합</strong></li>
           <li><strong>납입 완료 후에도 계속 환급금 증가(복리 효과)</strong></li>
@@ -632,16 +631,16 @@
       </div>
 
       <div class="section section-pros">
-        <div class="section-title">장점</div>
+        <div class="section-title"><svg class="i" aria-hidden="true"><use href="#i-thumb"/></svg>장점</div>
         <ul class="features pros">
-          <li><strong>납입 완료 후 높은 환급금(원금 이상)</strong></li>
+          <li><strong>납입 완료 후 높은 환급금(<span class="num">원금 이상</span>)</strong></li>
           <li><strong>보장받으며 환급금 축적</strong></li>
           <li>상속 자산으로 활용(비과세)</li>
         </ul>
       </div>
 
       <div class="section section-cons">
-        <div class="section-title">단점</div>
+        <div class="section-title"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg>단점</div>
         <ul class="features cons">
           <li>높은 보험료</li>
           <li>초기 납입액 대비 환급금 증가에 시간 필요</li>
@@ -653,8 +652,8 @@
     </div>
 
     <!-- 빠른 비교표 -->
-    <div class="comparison-section reveal" id="compare">
-      <div class="comparison-title">한눈에 보는 비교</div>
+    <div class="comparison-section" id="compare">
+      <div class="comparison-title"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg>한눈에 보는 비교</div>
 
       <div class="comparison-item">
         <div class="comparison-label">보험료</div>
@@ -688,11 +687,11 @@
         <div class="comparison-row">
           <div class="comparison-box box-renewal">
             <div class="box-label">갱신형</div>
-            원하는 시점까지<br/>(보통 100세까지 가능)
+            원하는 시점까지<br/>(보통 <span class="num">100세</span>까지 가능)
           </div>
           <div class="comparison-box box-non-renewal">
             <div class="box-label">비갱신형</div>
-            설정된 만기<br/>(90세, 종신)
+            설정된 만기<br/>(<span class="num">90세</span>, 종신)
           </div>
           <div class="comparison-box box-whole">
             <div class="box-label">종신형(환급형)</div>
@@ -721,49 +720,55 @@
     </div>
 
     <!-- 하단 연락처 (명함) -->
-    <div class="footer reveal" id="contact">
-      <img class="footer-photo" src="profile.jpg" alt="신한라이프 윤영호" width="120" height="120" loading="lazy">
+    <div class="footer" id="contact">
+      <img class="footer-photo" src="profile.jpg" alt="신한라이프 윤영호" width="112" height="112" loading="lazy">
       <div class="footer-info">
       📞 <strong>신한라이프 윤영호<br/><a class="tel" href="tel:01057191141">010-5719-1141</a></strong><br/>궁금하신 점은 언제든 연락주세요
-        <div class="footer-actions">
-          <a class="btn btn-call" href="tel:01057191141"><span class="ico" aria-hidden="true">📞</span>전화하기</a>
-          <a class="btn btn-sms" href="sms:01057191141"><span class="ico" aria-hidden="true">💬</span>문자 보내기</a>
+        <div class="footer-actions" data-ui>
+          <a class="btn btn-call" href="tel:01057191141"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>전화하기</a>
+          <a class="btn btn-sms" href="sms:01057191141"><svg class="i" aria-hidden="true"><use href="#i-message"/></svg>문자 보내기</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- 화면 아래 고정 연락 버튼 (899px 이하에서만 표시) -->
-  <div class="contact-bar" id="contact-bar">
-    <a class="btn btn-call" href="tel:01057191141"><span class="ico" aria-hidden="true">📞</span>전화하기</a>
-    <a class="btn btn-sms" href="sms:01057191141"><span class="ico" aria-hidden="true">💬</span>문자 보내기</a>
+  <div class="contact-bar" id="contact-bar" data-ui>
+    <a class="btn btn-call" href="tel:01057191141"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>전화하기</a>
+    <a class="btn btn-sms" href="sms:01057191141"><svg class="i" aria-hidden="true"><use href="#i-message"/></svg>문자 보내기</a>
     <!-- 카카오톡 버튼 자리: 채널 주소를 받으면 여기에 추가 -->
   </div>
 
   <script>
     (function () {
-      var reveals = document.querySelectorAll('.reveal');
+      var root = document.documentElement;
+      var steps = [100, 112.5, 125, 137.5];
+      var buttons = document.querySelectorAll('.fontsize button');
+      var current = steps.indexOf(parseFloat(root.style.fontSize) || 100);
+      if (current < 0) current = 0;
+
+      function apply() {
+        root.style.fontSize = steps[current] + '%';
+        root.setAttribute('data-fs', current);
+        buttons[0].disabled = current === 0;
+        buttons[1].disabled = current === steps.length - 1;
+        try { localStorage.setItem('yoon-font', steps[current]); } catch (e) {}
+      }
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          current = Math.min(steps.length - 1, Math.max(0, current + Number(btn.dataset.step)));
+          apply();
+        });
+      });
+      apply();
+
       var bar = document.getElementById('contact-bar');
       var contact = document.getElementById('contact');
-
-      if (!('IntersectionObserver' in window)) {
-        reveals.forEach(function (el) { el.classList.add('is-visible'); });
-        return;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          bar.classList.toggle('is-hidden', entries[0].isIntersecting);
+        }, { threshold: 0.15 }).observe(contact);
       }
-
-      var revealObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-      reveals.forEach(function (el) { revealObserver.observe(el); });
-
-      new IntersectionObserver(function (entries) {
-        bar.classList.toggle('is-hidden', entries[0].isIntersecting);
-      }, { threshold: 0.15 }).observe(contact);
     })();
   </script>
 </body>
